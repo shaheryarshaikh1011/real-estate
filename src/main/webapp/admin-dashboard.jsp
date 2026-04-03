@@ -24,6 +24,46 @@ body {
 .badge-pending   { background-color: #f39c12; color: #000; }
 .badge-confirmed { background-color: #27ae60; }
 .badge-cancelled { background-color: #e74c3c; }
+
+/* Form fields — light background so text is visible */
+.prop-input {
+  background-color: #1e1e2e;
+  border: 1px solid #444;
+  color: #fff;
+  border-radius: 8px;
+  padding: 10px 14px;
+  width: 100%;
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+.prop-input::placeholder { color: #888; }
+.prop-input:focus {
+  outline: none;
+  border-color: #27ae60;
+  box-shadow: 0 0 0 3px rgba(39,174,96,0.2);
+  background-color: #1e1e2e;
+  color: #fff;
+}
+.prop-input.is-invalid { border-color: #e74c3c !important; }
+.prop-label {
+  font-size: 13px;
+  color: #aaa;
+  margin-bottom: 5px;
+  display: block;
+}
+.field-error {
+  color: #e74c3c;
+  font-size: 12px;
+  margin-top: 4px;
+  display: none;
+}
+#imgPreview {
+  max-height: 140px;
+  border-radius: 8px;
+  border: 1px solid #444;
+  display: none;
+  margin-top: 8px;
+}
 </style>
 </head>
 <body>
@@ -51,33 +91,60 @@ body {
   <!-- ADD PROPERTY -->
   <div class="section-card">
     <h4 class="mb-4">&#127968; Add New Property</h4>
-    <form action="addproperty" method="post">
+    <form action="addproperty" method="post" id="addPropertyForm" novalidate>
       <div class="row g-3">
+
         <div class="col-md-6">
-          <input type="text" name="title" class="form-control bg-dark text-white border-secondary" placeholder="Property Title" required>
+          <label class="prop-label">Property Title *</label>
+          <input type="text" name="title" id="title" class="prop-input" placeholder="e.g. Vasai Villa">
+          <div class="field-error" id="titleErr">Title is required.</div>
         </div>
+
         <div class="col-md-6">
-          <input type="text" name="city" class="form-control bg-dark text-white border-secondary" placeholder="City" required>
+          <label class="prop-label">City *</label>
+          <input type="text" name="city" id="city" class="prop-input" placeholder="e.g. Mumbai">
+          <div class="field-error" id="cityErr">City is required.</div>
         </div>
+
         <div class="col-md-3">
-          <input type="number" name="bedrooms" class="form-control bg-dark text-white border-secondary" placeholder="Bedrooms" min="1" required>
+          <label class="prop-label">Bedrooms *</label>
+          <input type="number" name="bedrooms" id="bedrooms" class="prop-input" placeholder="e.g. 3" min="1">
+          <div class="field-error" id="bedroomsErr">Enter a valid number (min 1).</div>
         </div>
+
         <div class="col-md-3">
-          <input type="number" name="bathrooms" class="form-control bg-dark text-white border-secondary" placeholder="Bathrooms" min="1" required>
+          <label class="prop-label">Bathrooms *</label>
+          <input type="number" name="bathrooms" id="bathrooms" class="prop-input" placeholder="e.g. 2" min="1">
+          <div class="field-error" id="bathroomsErr">Enter a valid number (min 1).</div>
         </div>
+
         <div class="col-md-3">
-          <input type="number" name="area_sqft" class="form-control bg-dark text-white border-secondary" placeholder="Area (sqft)" min="1" required>
+          <label class="prop-label">Area (sqft) *</label>
+          <input type="number" name="area_sqft" id="area_sqft" class="prop-input" placeholder="e.g. 1200" min="1">
+          <div class="field-error" id="areaErr">Enter a valid area (min 1).</div>
         </div>
+
         <div class="col-md-3">
-          <input type="number" step="0.01" name="price" class="form-control bg-dark text-white border-secondary" placeholder="Price (&#8377;)" min="0" required>
+          <label class="prop-label">Price (&#8377;) *</label>
+          <input type="number" step="0.01" name="price" id="price" class="prop-input" placeholder="e.g. 25000" min="0">
+          <div class="field-error" id="priceErr">Enter a valid price (min 0).</div>
         </div>
+
         <div class="col-12">
-          <input type="url" name="image_url" class="form-control bg-dark text-white border-secondary" placeholder="Image URL" required>
+          <label class="prop-label">Image URL *</label>
+          <input type="text" name="image_url" id="image_url" class="prop-input" placeholder="https://...">
+          <div class="field-error" id="imageErr">Enter a valid image URL starting with http.</div>
+          <img id="imgPreview" src="" alt="Image Preview">
         </div>
-        <div class="col-12">
+
+        <div class="col-12 mt-2">
           <button type="submit" class="btn btn-success px-4">Add Property</button>
+          <button type="reset" class="btn btn-outline-secondary px-4 ms-2" onclick="resetForm()">Clear</button>
         </div>
+
       </div>
+    </form>
+  </div>
     </form>
   </div>
 
@@ -151,5 +218,52 @@ body {
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+<script>
+// Image URL live preview
+document.getElementById("image_url").addEventListener("input", function () {
+  const preview = document.getElementById("imgPreview");
+  const val = this.value.trim();
+  if (val.startsWith("http")) {
+    preview.src = val;
+    preview.style.display = "block";
+    preview.onerror = () => { preview.style.display = "none"; };
+  } else {
+    preview.style.display = "none";
+  }
+});
+
+// Form validation
+document.getElementById("addPropertyForm").addEventListener("submit", function (e) {
+  let valid = true;
+
+  function check(id, errId, condition) {
+    const el = document.getElementById(id);
+    const err = document.getElementById(errId);
+    if (condition) {
+      el.classList.add("is-invalid");
+      err.style.display = "block";
+      valid = false;
+    } else {
+      el.classList.remove("is-invalid");
+      err.style.display = "none";
+    }
+  }
+
+  check("title",     "titleErr",    !document.getElementById("title").value.trim());
+  check("city",      "cityErr",     !document.getElementById("city").value.trim());
+  check("bedrooms",  "bedroomsErr", !document.getElementById("bedrooms").value || parseInt(document.getElementById("bedrooms").value) < 1);
+  check("bathrooms", "bathroomsErr",!document.getElementById("bathrooms").value || parseInt(document.getElementById("bathrooms").value) < 1);
+  check("area_sqft", "areaErr",     !document.getElementById("area_sqft").value || parseInt(document.getElementById("area_sqft").value) < 1);
+  check("price",     "priceErr",    document.getElementById("price").value === "" || parseFloat(document.getElementById("price").value) < 0);
+  const imgVal = document.getElementById("image_url").value.trim();
+  check("image_url", "imageErr",    !imgVal || !imgVal.startsWith("http"));
+
+  if (!valid) e.preventDefault();
+});
+
+function resetForm() {
+  document.querySelectorAll(".prop-input").forEach(el => el.classList.remove("is-invalid"));
+  document.querySelectorAll(".field-error").forEach(el => el.style.display = "none");
+  document.getElementById("imgPreview").style.display = "none";
+}
+</script>
