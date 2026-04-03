@@ -36,6 +36,7 @@ public class ViewPropertiesServlet extends HttpServlet {
             while (rs.next()) {
                 Map<String, String> property = new HashMap<>();
 
+                property.put("id", rs.getString("id"));
                 property.put("title", rs.getString("title"));
                 property.put("city", rs.getString("city"));
                 property.put("bedrooms", rs.getString("bedrooms"));
