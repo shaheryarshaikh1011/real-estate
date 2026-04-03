@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rental Properties</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: 
+    linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+    url('https://images.unsplash.com/photo-1507089947368-19c1da9775ae?auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+  padding: 30px 15px;
+  color: #fff;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #27ae60;
+}
+
+.property-card {
+  background: rgba(20,20,20,0.9);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.6);
+  transition: 0.3s;
+}
+
+.property-card:hover {
+  transform: translateY(-5px);
+}
+
+.property-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.property-body {
+  padding: 15px;
+}
+
+.property-body h5 {
+  color: #27ae60;
+}
+
+.price {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.btn-rent {
+  background-color: #27ae60;
+  border: none;
+  width: 100%;
+}
+
+.btn-rent:hover {
+  background-color: #1e8449;
+}
+</style>
+</head>
+
+<body>
+
+<h2>Available Rental Properties</h2>
+
+<div class="container">
+  <div class="row g-4">
+
+    <!-- Property 1 -->
+    <div class="col-md-4">
+      <div class="property-card">
+        <img src="https://images.unsplash.com/photo-1560448075-bb485b067938" alt="property">
+        <div class="property-body">
+          <h5>2BHK Flat</h5>
+          <p>Fully furnished apartment near metro station.</p>
+          <p class="price">₹12,000 / month</p>
+          <p>City: Mumbai</p>
+          <button class="btn btn-rent">Rent Now</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Property 2 -->
+    <div class="col-md-4">
+      <div class="property-card">
+        <img src="https://images.unsplash.com/photo-1572120360610-d971b9d7767c" alt="property">
+        <div class="property-body">
+          <h5>Luxury House</h5>
+          <p>Spacious independent house with garden.</p>
+          <p class="price">₹25,000 / month</p>
+          <p>City: Delhi</p>
+          <button class="btn btn-rent">Rent Now</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Property 3 -->
+    <div class="col-md-4">
+      <div class="property-card">
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c" alt="property">
+        <div class="property-body">
+          <h5>Studio Apartment</h5>
+          <p>Perfect for working professionals.</p>
+          <p class="price">₹8,000 / month</p>
+          <p>City: Bangalore</p>
+          <button class="btn btn-rent">Rent Now</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

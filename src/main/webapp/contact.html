@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - Real Estate</title>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Body with background image */
+    body {
+      background: url('https://images.unsplash.com/photo-1599423300746-b62533397364?auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+    }
+
+    /* Overlay for readability */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0, 0, 0, 0.6); /* dark overlay */
+      z-index: -1;
+    }
+
+    /* Navigation */
+    nav {
+      background-color: rgba(15, 15, 15, 0.85); /* semi-transparent */
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    nav ul li a:hover {
+      text-decoration: underline;
+    }
+
+    /* Contact Section */
+    .contact-section {
+      max-width: 1000px;
+      margin: 50px auto;
+      background: rgba(255, 255, 255, 0.95); /* slightly transparent white */
+      color: #070707;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    }
+
+    .contact-section h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #070707;
+    }
+
+    .contact-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+
+    .contact-form, .contact-info {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .contact-form input, 
+    .contact-form textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .contact-form button {
+      background-color: #1c1d1c;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    .contact-form button:hover {
+      background-color: #080808;
+    }
+
+    .contact-info p {
+      margin-bottom: 15px;
+      color: #070707;
+      font-size: 16px;
+    }
+
+    .contact-info strong {
+      color: #070707;
+    }
+
+    /* Footer */
+    footer {
+      background-color: rgba(20, 20, 20, 0.9);
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .contact-container {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="logo">Real Estate</div>
+    <ul>
+      <li><a href="home.html">Home</a></li>
+      <li><a href="register.html">Register</a></li>
+      <li><a href="login.html">Login</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Contact Section -->
+  <section class="contact-section">
+    <h2>Contact Us</h2>
+    <div class="contact-container">
+      
+      <!-- Contact Form -->
+      <div class="contact-form">
+        <form action="#" method="POST">
+          <input type="text" name="name" placeholder="Your Name" required>
+          <input type="email" name="email" placeholder="Your Email" required>
+          <input type="text" name="subject" placeholder="Subject" required>
+          <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
+          <button type="submit">Send Message</button>
+        </form>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="contact-info">
+        <p><strong>Address:</strong> 123 Real Estate Street, Mumbai, India</p>
+        <p><strong>Phone:</strong> +91 98765 43210</p>
+        <p><strong>Email:</strong> info@realestate.com</p>
+        <p><strong>Working Hours:</strong> Mon - Sat: 9 AM - 6 PM</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 Real Estate. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Real Estate Home</title>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f2f2f2;
+    }
+
+    /* Navigation */
+    nav {
+      background-color: #101110;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav h1 {
+      font-size: 24px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    nav ul li a:hover {
+      text-decoration: underline;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: url('https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=1470&q=80') no-repeat center center;
+      background-size: cover;
+      height: 400px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.5);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-content h2 {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    .hero-content p {
+      font-size: 20px;
+    }
+
+    /* Featured Listings */
+    .listing-section {
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .listing-section h2 {
+      text-align: center;
+      margin-bottom: 40px;
+      color: #333;
+    }
+
+    .listing-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .property-card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+
+    .property-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .property-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .property-details {
+      padding: 15px;
+    }
+
+    .property-details h3 {
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .property-details p {
+      margin: 5px 0;
+      color: #555;
+      font-size: 14px;
+    }
+
+    .property-details .price {
+      font-weight: bold;
+      color: #0a0a0a;
+      font-size: 16px;
+    }
+
+    .property-details .btn {
+      display: block;
+      text-align: center;
+      background-color: #000000;
+      color: white;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .property-details .btn:hover {
+      background-color: #050505;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #040404;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <h1>Real Estate</h1>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="register.html">Register</a></li>
+      <li><a href="login.html">Login</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="addproperty.html">Addproperty</a></li>
+      <li><a href="search.html"><search></search></a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <div class="hero">
+    <div class="hero-content">
+      <h2>Find Your Dream Home</h2>
+      <p>Explore the best properties for sale and rent</p>
+    </div>
+  </div>
+  
+
+  <!-- Featured Listings -->
+  <section class="listing-section">
+    <h2>Featured Properties</h2>
+    <div class="listing-container">
+
+      <!-- Property Card 1 -->
+      <div class="property-card">
+        <img src="https://th.bing.com/th/id/OIP.c6JFJscYBu_grvZxfE8nnAHaEJ?w=332&h=186&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" alt="Property 1">
+        <div class="property-details">
+          <h3>Luxury Villa</h3>
+          <p>City: Los Angeles</p>
+          <p>Bedrooms: 4 | Bathrooms: 3 | 3500 sqft</p>
+          <p class="price">₹1,200,000</p>
+        </div>
+      </div>
+
+      <!-- Property Card 2 -->
+      <div class="property-card">
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" alt="Property 2">
+        <div class="property-details">
+          <h3>Modern Apartment</h3>
+          <p>City: New York</p>
+          <p>Bedrooms: 2 | Bathrooms: 2 | 1200 sqft</p>
+          <p class="price">₹750,000</p>
+        </div>
+      </div>
+
+      <!-- Property Card 3 -->
+      <div class="property-card">
+        <img src="https://th.bing.com/th/id/OIP.GMdv1mMwgjuggydxDWD-eAHaD7?w=307&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" alt="Property 3">
+        <div class="property-details">
+          <h3>Cozy Cottage</h3>
+          <p>City: Seattle</p>
+          <p>Bedrooms: 3 | Bathrooms: 2 | 1800 sqft</p>
+          <p class="price">₹520,000</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 Real Estate. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

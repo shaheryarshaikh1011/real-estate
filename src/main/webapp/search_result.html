@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Search Results</title>
+
+<style>
+
+/* Background Image + Dark Overlay */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  color: white;
+
+  background: 
+    linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+    url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
+
+  background-size: cover;
+}
+
+/* Navbar */
+nav {
+  background: rgba(0,0,0,0.9);
+  color: white;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin-left: 15px;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* Container */
+.container {
+  padding: 40px;
+}
+
+/* Property Cards */
+.property-card {
+  background: rgba(30, 30, 30, 0.95);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+  margin-bottom: 20px;
+  transition: 0.3s;
+}
+
+.property-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Text */
+.property-card h3 {
+  margin-top: 0;
+  color: #27ae60;
+}
+
+/* Button */
+.property-card button {
+  padding: 10px 20px;
+  background: #27ae60;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.property-card button:hover {
+  background: #219150;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<nav>
+  <div><strong>RealEstate</strong></div>
+  <div>
+    <a href="buyerDashboard.html">Dashboard</a>
+    <a href="login.html">Logout</a>
+  </div>
+</nav>
+
+<div class="container">
+
+<h2>Search Results</h2>
+
+<!-- Property 1 -->
+<div class="property-card">
+  <h3>Luxury Villa</h3>
+  <p>Location: Mumbai</p>
+  <p>BHK: 3 BHK</p>
+  <p>Price: ₹45,000/month</p>
+
+  <form action="bookproperty" method="post">
+    <input type="hidden" name="property_id" value="1">
+    <button type="submit">Book Now</button>
+  </form>
+</div>
+
+<!-- Property 2 -->
+<div class="property-card">
+  <h3>Modern Apartment</h3>
+  <p>Location: Delhi</p>
+  <p>BHK: 2 BHK</p>
+  <p>Price: ₹28,000/month</p>
+
+  <form action="bookproperty" method="post">
+    <input type="hidden" name="property_id" value="2">
+    <button type="submit">Book Now</button>
+  </form>
+</div>
+
+<!-- Property 3 -->
+<div class="property-card">
+  <h3>Cozy Studio</h3>
+  <p>Location: Bangalore</p>
+  <p>BHK: 1 BHK</p>
+  <p>Price: ₹18,000/month</p>
+
+  <form action="bookproperty" method="post">
+    <input type="hidden" name="property_id" value="3">
+    <button type="submit">Book Now</button>
+  </form>
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book Property</title>
+
+<style>
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #f2f2f2;
+}
+
+/* Navigation */
+nav {
+  background-color: #101110;
+  color: white;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav h1 {
+  font-size: 24px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav ul li a:hover {
+  text-decoration: underline;
+}
+
+/* Hero Section */
+.hero {
+  background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1470&q=80') no-repeat center center;
+  background-size: cover;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  position: relative;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+}
+
+.hero h2 {
+  position: relative;
+  z-index: 1;
+  font-size: 40px;
+}
+
+/* Booking Section */
+.booking-section {
+  max-width: 800px;
+  margin: 40px auto;
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.booking-section h3 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.booking-section input,
+.booking-section select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.booking-section button {
+  width: 100%;
+  padding: 12px;
+  background: #000;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.booking-section button:hover {
+  background: #333;
+}
+
+/* Footer */
+footer {
+  background-color: #040404;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  margin-top: 40px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Navigation -->
+<nav>
+  <h1>Real Estate</h1>
+  <ul>
+    <li><a href="home.html">Home</a></li>
+    <li><a href="buyerDashboard.html">Dashboard</a></li>
+    <li><a href="login.html">Logout</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<div class="hero">
+  <h2>Book Your Dream Property</h2>
+</div>
+
+<!-- Booking Form -->
+<section class="booking-section">
+  <h3>Property Booking Form</h3>
+
+  <form action="bookproperty" method="post">
+  
+    <input type="hidden" name="property_id" value="1">
+
+    <label>Full Name</label>
+    <input type="text" name="buyer_name" required>
+
+    <label>Email</label>
+    <input type="email" name="email" required>
+
+    <label>Select Booking Date</label>
+    <input type="date" name="booking_date" required>
+
+    <button type="submit">Confirm Booking</button>
+
+  </form>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p>&copy; 2026 Real Estate. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
