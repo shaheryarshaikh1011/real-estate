@@ -60,7 +60,7 @@ public class BookPropertyServlet extends HttpServlet {
             int row = ps.executeUpdate();
 
             if (row > 0) {
-                response.sendRedirect("buyerDashboard.html?msg=Booked Successfully");
+                response.sendRedirect("viewproperties");
             } else {
                 response.getWriter().println("Booking Failed!");
             }

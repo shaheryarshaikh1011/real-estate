@@ -72,11 +72,19 @@
 
       <button type="submit" class="btn btn-dark w-100">Login</button>
 
+      <div id="loginError" class="alert alert-danger mt-3 d-none">Invalid email or password!</div>
+
       <p class="text-center mt-3">
         Don't have an account? <a href="signup.html">Sign up</a>
       </p>
     </form>
   </div>
 </div>
+
+<script>
+  if (new URLSearchParams(window.location.search).get("error") === "1") {
+    document.getElementById("loginError").classList.remove("d-none");
+  }
+</script>
 </body>
 </html>
