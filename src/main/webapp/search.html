@@ -7,209 +7,112 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #514f4f; /* Dark background */
-      color: #fff;
-      margin: 0;
-      padding-bottom: 50px;
-    }
-
-    /* Navbar */
-    nav {
-      background-color: #101010;
-      padding: 15px 30px;
-    }
-
-    nav h1 {
+      background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)),
+        url("https://images.unsplash.com/photo-1600596542815-ffad4c1539a9") no-repeat center center fixed;
+      background-size: cover;
+      min-height: 100vh;
       color: #fff;
     }
 
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 20px;
-    }
-
-    nav ul li a {
-      color: #fff;
-      text-decoration: none;
-    }
-
-    nav ul li a:hover {
-      text-decoration: underline;
-    }
-
-    /* Page Heading */
-    .page-header {
-      text-align: center;
-      padding: 40px 20px 20px;
-    }
-
-    .page-header h2 {
-      font-size: 36px;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
-
-    .page-header p {
-      color: #ccc;
-    }
-
-    /* Search Form */
     .search-card {
-      background: #2c2c2c; /* Dark card */
-      border-radius: 15px;
+      background: rgba(255,255,255,0.07);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px;
       padding: 30px;
-      max-width: 1100px;
-      margin: 20px auto;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
     }
 
-    .search-card .form-control, 
-    .search-card .form-select {
-      border-radius: 8px;
+    .form-control, .form-select {
+      background-color: rgba(255,255,255,0.1) !important;
+      border: 1px solid rgba(255,255,255,0.2) !important;
+      color: #fff !important;
       height: 45px;
-      background: #1f1f1f;
-      border: 1px solid #444;
-      color: #fff;
     }
 
-    .search-card .form-control::placeholder {
-      color: #aaa;
+    .form-control::placeholder { color: #aaa !important; }
+
+    .form-select option { background-color: #1a1a2e; color: #fff; }
+
+    .form-control:focus, .form-select:focus {
+      box-shadow: 0 0 0 3px rgba(39,174,96,0.3) !important;
+      border-color: #27ae60 !important;
     }
-
-    .search-card button {
-      border-radius: 8px;
-      height: 45px;
-      background-color: #27ae60;
-      color: #fff;
-      font-weight: 600;
-      transition: 0.3s;
-      border: none;
-    }
-
-    .search-card button:hover {
-      background-color: #219150;
-    }
-
-    /* Search Results */
-    .listing-container {
-      max-width: 1200px;
-      margin: 40px auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 20px;
-    }
-
-    .property-card {
-      background: #2c2c2c; /* Dark card */
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 5px 15px rgba(232, 227, 227, 0.5);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .property-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 25px rgba(109, 107, 107, 0.7);
-    }
-
-    .property-card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-    }
-
-
-
-
-    .property-details .btn:hover {
-      background-color: #219150;
-    }
-
-    /* Footer */
-    footer {
-      background: #f0eeee;
-      color: #101010;
-      text-align: center;
-      padding: 25px;
-      margin-top: 50px;
-    }
-
   </style>
 </head>
 <body>
 
-  <!-- Navbar -->
-  <nav class="d-flex justify-content-between align-items-center">
-    <h1>Real Estate</h1>
-    <ul class="d-flex align-items-center">
-      <li><a href="viewproperties">Dashboard</a></li>
-      <li><a href="mybookings">My Bookings</a></li>
-      <li><a href="login.html">Logout</a></li>
-    </ul>
+  <nav class="navbar navbar-dark bg-black px-4">
+    <a class="navbar-brand">&#127968; RealEstate</a>
+    <div>
+      <a href="viewproperties" class="btn btn-outline-light btn-sm me-2">Dashboard</a>
+      <a href="mybookings" class="btn btn-outline-light btn-sm me-2">My Bookings</a>
+      <a href="profile" class="btn btn-outline-light btn-sm me-2">Profile</a>
+      <a href="login.html" class="btn btn-danger btn-sm">Logout</a>
+    </div>
   </nav>
 
-  <!-- Page Header -->
-  <div class="page-header">
-    <h2>Search Properties</h2>
-    <p>Find the perfect property based on your preferences</p>
+  <div class="container mt-5">
+    <div class="text-center mb-4">
+      <h2 class="fw-bold">Search Properties</h2>
+      <p class="text-secondary">Find the perfect property based on your preferences</p>
+    </div>
+
+    <div class="search-card">
+      <form class="row g-3" action="searchproperty" method="post">
+        <div class="col-md-3 col-12">
+          <input type="text" name="city" class="form-control" placeholder="City">
+        </div>
+        <div class="col-md-2 col-6">
+          <select name="transaction_type" class="form-select">
+            <option value="">Buy / Rent</option>
+            <option value="buy">Buy</option>
+            <option value="rent">Rent</option>
+          </select>
+        </div>
+        <div class="col-md-2 col-6">
+          <select name="property_type" class="form-select">
+            <option value="">Property Type</option>
+            <option value="flat">Flat</option>
+            <option value="house">House</option>
+            <option value="plot">Plot</option>
+          </select>
+        </div>
+        <div class="col-md-2 col-6">
+          <input type="number" name="min_price" class="form-control" placeholder="Min Price (&#8377;)">
+        </div>
+        <div class="col-md-1 col-6">
+          <input type="number" name="max_price" class="form-control" placeholder="Max Price">
+        </div>
+        <div class="col-md-1 col-6">
+          <select name="bedrooms" class="form-select">
+            <option value="">Beds</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4+</option>
+          </select>
+        </div>
+        <div class="col-md-1 col-6">
+          <select name="bathrooms" class="form-select">
+            <option value="">Baths</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3+</option>
+          </select>
+        </div>
+        <div class="col-12">
+          <button type="submit" class="btn btn-success w-100 fw-semibold" style="height:45px;">
+            &#128269; Search Properties
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
 
-  <!-- Search Form -->
-  <div class="search-card">
-    <form class="row g-3" action="searchproperty" method="post">
-      <div class="col-md-3 col-12">
-        <input type="text" name="city" class="form-control" placeholder="City">
-      </div>
-      <div class="col-md-2 col-6">
-        <select name="transaction_type" class="form-select">
-          <option value="" selected disabled>Buy/Rent</option>
-          <option value="buy">Buy</option>
-          <option value="rent">Rent</option>
-        </select>
-      </div>
-      <div class="col-md-2 col-6">
-        <select name="property_type" class="form-select">
-          <option value="" selected disabled>Property Type</option>
-          <option value="flat">Flat</option>
-          <option value="house">House</option>
-          <option value="plot">Plot</option>
-        </select>
-      </div>
-      <div class="col-md-2 col-6">
-        <input type="number" name="min_price" class="form-control" placeholder="Min Price">
-      </div>
-      <div class="col-md-2 col-6">
-        <input type="number" name="max_price" class="form-control" placeholder="Max Price">
-      </div>
-      <div class="col-md-1 col-6">
-        <select name="bedrooms" class="form-select">
-          <option value="" selected>Bedrooms</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4+</option>
-        </select>
-      </div>
-      <div class="col-md-1 col-6">
-        <select name="bathrooms" class="form-select">
-          <option value="" selected>Bathrooms</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3+</option>
-        </select>
-      </div>
-      <div class="col-12">
-        <button type="submit" class="btn w-100">Search Properties</button>
-      </div>
-    </form>
-  </div>
-
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2026 Real Estate. All rights reserved.</p>
+  <footer class="text-center text-secondary py-4 mt-5">
+    <p class="mb-0">&copy; 2026 Real Estate. All rights reserved.</p>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
