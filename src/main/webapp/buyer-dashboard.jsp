@@ -62,7 +62,7 @@ if (properties != null && !properties.isEmpty()) {
         Bedrooms: <%= p.get("bedrooms") %> BHK <br>
         Price: ₹<%= p.get("price") %>
       </p>
-      <a href="bookproperty.html" class="btn btn-primary w-100">Book Now</a>
+      <a href="bookproperty.jsp?property_id=<%= p.get("id") %>" class="btn btn-primary w-100">Book Now</a>
     </div>
   </div>
 </div>

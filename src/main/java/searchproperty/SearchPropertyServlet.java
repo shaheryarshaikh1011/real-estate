@@ -2,7 +2,7 @@ package searchproperty;
 
 import java.io.IOException;
 import java.sql.*;
-
+import java.util.*;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -19,76 +19,68 @@ public class SearchPropertyServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        response.setContentType("text/html");
-
         try {
-            // ✅ GET PARAMETERS
             String city = request.getParameter("city");
-            String transactionType = request.getParameter("transaction_type");
-            String propertyType = request.getParameter("property_type");
             String minPriceStr = request.getParameter("min_price");
             String maxPriceStr = request.getParameter("max_price");
             String bedroomsStr = request.getParameter("bedrooms");
             String bathroomsStr = request.getParameter("bathrooms");
 
-            // 🔍 DEBUG
-            System.out.println("city: " + city);
-            System.out.println("transaction: " + transactionType);
-            System.out.println("type: " + propertyType);
-            System.out.println("minPrice: " + minPriceStr);
-            System.out.println("maxPrice: " + maxPriceStr);
-            System.out.println("bedrooms: " + bedroomsStr);
-            System.out.println("bathrooms: " + bathroomsStr);
+            // Build parameterized query — no string concatenation of user input
+            StringBuilder sql = new StringBuilder("SELECT * FROM properties WHERE 1=1");
+            List<Object> params = new ArrayList<>();
 
-            // ✅ BASE QUERY
-            String sql = "SELECT * FROM properties WHERE city=?";
-
-            // OPTIONAL FILTERS
+            if (city != null && !city.isEmpty()) {
+                sql.append(" AND city=?");
+                params.add(city);
+            }
             if (minPriceStr != null && !minPriceStr.isEmpty()) {
-                sql += " AND price >= " + minPriceStr;
+                sql.append(" AND price >= ?");
+                params.add(Double.parseDouble(minPriceStr));
             }
-
             if (maxPriceStr != null && !maxPriceStr.isEmpty()) {
-                sql += " AND price <= " + maxPriceStr;
+                sql.append(" AND price <= ?");
+                params.add(Double.parseDouble(maxPriceStr));
             }
-
             if (bedroomsStr != null && !bedroomsStr.isEmpty()) {
-                sql += " AND bedrooms >= " + bedroomsStr;
+                sql.append(" AND bedrooms >= ?");
+                params.add(Integer.parseInt(bedroomsStr));
             }
-
             if (bathroomsStr != null && !bathroomsStr.isEmpty()) {
-                sql += " AND bathrooms >= " + bathroomsStr;
+                sql.append(" AND bathrooms >= ?");
+                params.add(Integer.parseInt(bathroomsStr));
             }
 
-            // ✅ DB CONNECTION
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
 
-            PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setString(1, city);
+            PreparedStatement pst = conn.prepareStatement(sql.toString());
+            for (int i = 0; i < params.size(); i++) {
+                pst.setObject(i + 1, params.get(i));
+            }
 
             ResultSet rs = pst.executeQuery();
 
-            // ✅ OUTPUT HTML
-            response.sendRedirect("search_result.html?msg=Booked Successfully");
-
+            List<Map<String, String>> results = new ArrayList<>();
             while (rs.next()) {
-                response.getWriter().println("<div style='border:1px solid #ccc; padding:15px; margin:10px;'>");
-
-                response.getWriter().println("<h3>" + rs.getString("title") + "</h3>");
-                response.getWriter().println("<p>City: " + rs.getString("city") + "</p>");
-                response.getWriter().println("<p>Bedrooms: " + rs.getInt("bedrooms") + "</p>");
-                response.getWriter().println("<p>Bathrooms: " + rs.getInt("bathrooms") + "</p>");
-                response.getWriter().println("<p>Area: " + rs.getInt("area_sqft") + " sqft</p>");
-                response.getWriter().println("<p>Price: ₹" + rs.getDouble("price") + "</p>");
-                response.getWriter().println("<img src='" + rs.getString("image_url") + "' width='200'>");
-
-                response.getWriter().println("</div>");
+                Map<String, String> prop = new HashMap<>();
+                prop.put("id", rs.getString("id"));
+                prop.put("title", rs.getString("title"));
+                prop.put("city", rs.getString("city"));
+                prop.put("bedrooms", rs.getString("bedrooms"));
+                prop.put("bathrooms", rs.getString("bathrooms"));
+                prop.put("area_sqft", rs.getString("area_sqft"));
+                prop.put("price", rs.getString("price"));
+                prop.put("image_url", rs.getString("image_url"));
+                results.add(prop);
             }
 
             rs.close();
             pst.close();
             conn.close();
+
+            request.setAttribute("results", results);
+            request.getRequestDispatcher("search_result.jsp").forward(request, response);
 
         } catch (Exception e) {
             e.printStackTrace();

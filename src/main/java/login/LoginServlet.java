@@ -40,7 +40,7 @@ public class LoginServlet extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("userId", rs.getInt("id"));
                 session.setAttribute("fullname", rs.getString("fullname"));
-                response.sendRedirect("buyerdashboard.html");
+                response.sendRedirect("viewproperties");
             } else {
                 response.getWriter().println("Invalid email or password!");
             }
