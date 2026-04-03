@@ -37,6 +37,15 @@ body {
 
 <body>
 
+<nav class="navbar navbar-dark bg-black px-4">
+  <a class="navbar-brand">&#127968; RealEstate</a>
+  <div>
+    <a href="mybookings" class="btn btn-outline-light btn-sm me-2">My Bookings</a>
+    <a href="search.html" class="btn btn-outline-light btn-sm me-2">Search</a>
+    <a href="login.html" class="btn btn-danger btn-sm">Logout</a>
+  </div>
+</nav>
+
 <div class="container mt-4">
 
 <h2>Available Properties</h2>
