@@ -20,6 +20,12 @@ public class AddPropertyServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        HttpSession session = request.getSession(false);
+        if (session == null || session.getAttribute("adminId") == null) {
+            response.sendRedirect("admin-login.html");
+            return;
+        }
+
         try {
             // ✅ GET PARAMETERS
             String title = request.getParameter("title");
@@ -112,9 +118,9 @@ public class AddPropertyServlet extends HttpServlet {
             int row = pst.executeUpdate();
 
             if (row > 0) {
-                response.getWriter().println("✅ Property Added Successfully!");
+                response.sendRedirect("admindashboard?msg=Property+Added+Successfully");
             } else {
-                response.getWriter().println("❌ Failed to add property!");
+                response.getWriter().println("Failed to add property!");
             }
 
             pst.close();

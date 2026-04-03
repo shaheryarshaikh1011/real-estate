@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin Login - Real Estate</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background:
+        linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+        url("https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1470&q=80") no-repeat center center fixed;
+      background-size: cover;
+      min-height: 100vh;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .card {
+      border-radius: 14px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+      background-color: rgba(255,255,255,0.95);
+    }
+    .form-control { border-radius: 8px; }
+    .btn-admin {
+      background-color: #1a1a2e;
+      border-color: #1a1a2e;
+      color: white;
+    }
+    .btn-admin:hover {
+      background-color: #16213e;
+      border-color: #16213e;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+<div class="container d-flex justify-content-center align-items-center vh-100">
+  <div class="card p-4" style="width: 360px;">
+    <h3 class="text-center mb-1">&#9881; Admin Login</h3>
+    <p class="text-center text-muted mb-4" style="font-size:13px;">Real Estate Management</p>
+
+    <form action="AdminLoginServlet" method="post">
+      <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-control" name="email" placeholder="Admin email" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input type="password" class="form-control" name="password" placeholder="Password" required>
+      </div>
+
+      <button type="submit" class="btn btn-admin w-100">Login as Admin</button>
+
+      <div id="loginError" class="alert alert-danger mt-3 d-none">Invalid admin credentials!</div>
+      <div id="registeredMsg" class="alert alert-success mt-3 d-none">Account created! Please login.</div>
+    </form>
+
+    <p class="text-center mt-3" style="font-size:13px;">
+      New admin? <a href="admin-register.html">Register here</a>
+    </p>
+    <p class="text-center mt-1" style="font-size:13px;">
+      <a href="login.html" class="text-muted">&#8592; User Login</a>
+    </p>
+  </div>
+</div>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("error") === "1") {
+    document.getElementById("loginError").classList.remove("d-none");
+  }
+  if (params.get("registered") === "1") {
+    document.getElementById("registeredMsg").classList.remove("d-none");
+  }
+</script>
+</body>
+</html>
